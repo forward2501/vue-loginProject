@@ -4,43 +4,47 @@
    <!--登录form-->
    <form action="" v-if="isLoinForm">
       <div>
-        <label>用户名:
+        <label><span>用户名</span>
           <input type="text" v-model="name">
         </label>
-        <span v-if="isNoRegName" :style="{color:redFont}">登录失败，该用户名未注册！</span>
       </div>
       <div>
-        <label>密码:
+        <label><span>密码</span>
           <input type="password" v-model="pw">
         </label>
-        <span v-if="isErrorPw" :style="{color:redFont}">登录失败，密码错误！</span>
       </div>
       <input :class="['btn']"  @click='login()'  type="submit" value="登录">
-      <span v-if="isInputNull" :style="{color:redFont}">用户名和密码不能为空！</span>
-      <a :class="['toRegLink']" @click="toRegForm()">点击跳转到注册</a>
+      <button :class="['toRegLink']" @click="toRegForm()">注册</button>
+      <div>
+        <span v-if="isInputNull" :style="{color:redFont}">用户名和密码不能为空！</span>
+        <span v-if="isNoRegName" :style="{color:redFont}">登录失败，该用户名未注册！</span>
+        <span v-if="isErrorPw" :style="{color:redFont}">登录失败，密码错误！</span>
+      </div>
    </form>
    <!--注册form-->
    <form action="" v-else>
    <div>
-        <label>用户名:
+        <label><span>用户名</span>
           <input type="text" v-model="name">
         </label>
-        <span v-if="isRepeatName" :style="{color:redFont}">该用户名已被注册，请重新输入!</span>
       </div>
       <div>
-        <label>密码:
+        <label><span>密码</span>
           <input type="password" v-model="pw">
         </label>
       </div>
       <div>
-        <label>再次输入密码:
+        <label><span>确认密码</span>
           <input type="password" v-model="repeatPw">
         </label>
-        <span :style="{color:redFont}"  v-if="diffentPw">两次输入密码不一致!</span>
       </div>
       <input  :class="['btn']"  @click="addUser()" type="submit" value="注册">
-      <span v-if="isInputNull" :style="{color:redFont}">用户名和密码不能为空！</span>
-      <a :class="['toLoginLink']" @click="toLoginForm()">点击跳转到登录</a>
+      <button :class="['toLoginLink']" @click="toLoginForm()">登录</button>
+      <div>
+        <span v-if="isRepeatName" :style="{color:redFont}">该用户名已被注册，请重新输入!</span>
+        <span v-if="isInputNull" :style="{color:redFont}">用户名和密码不能为空！</span>
+        <span :style="{color:redFont}"  v-if="diffentPw">两次输入密码不一致!</span>
+      </div>
    </form>
 </div>
 </template>
@@ -66,6 +70,8 @@ export default {
     login () {
       if (this.name.trim() === '' || this.pw.trim() === '') {
         this.isInputNull = true
+        this.isNoRegName = false
+        this.isErrorPw = false
         return
       } else {
         this.isInputNull = false
@@ -84,6 +90,8 @@ export default {
           break
         } else {
           this.isNoRegName = true
+          this.isInputNull = false
+          this.isErrorPw = false
         }
       }// for
 
@@ -97,6 +105,8 @@ export default {
         } else {
           // 密码错误
           this.isErrorPw = true
+          this.isInputNull = false
+          this.isNoRegName = false
         }
       }
     },
@@ -111,6 +121,8 @@ export default {
     addUser () {
       if (this.name.trim() === '' || this.pw.trim() === '' || this.repeatPw.trim() === '') {
         this.isInputNull = true
+        this.isRepeatName = false
+        this.diffentPw = false
         return
       } else {
         this.isInputNull = false
@@ -118,10 +130,14 @@ export default {
 
       if (localStorage.getItem(this.name)) { // 用户名已被注册
         this.isRepeatName = true
+        this.isInputNull = false
+        this.diffentPw = false
       } else {
         this.isRepeatName = false
         if (this.pw !== this.repeatPw) { // 密码不同
           this.diffentPw = true
+          this.isRepeatName = false
+          this.isInputNull = false
         } else {
           this.diffentPw = false
           localStorage.setItem(this.name, this.pw)
@@ -131,7 +147,7 @@ export default {
           this.isNoRegName = false
           this.isErrorPw = false
           this.isInputNull = false
-          alert('即将跳转到登录页面')
+          alert('注册成功！即将跳转到登录页面')
           this.isLoinForm = true
         }
       }
@@ -146,42 +162,75 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+/*混合组件*/
+@mixin input-style{
+  border-radius:3px;
+  padding:5px;
+  font-size:18px;
+  margin-top:20px;
+}
+@mixin label-style{
+  display: inline-block;
+  padding:5px;
+  width:80px;
+  text-align:right;
+  font-size:18px;
+  margin-top:20px;
+}
+@mixin button-style{
+  width: 100px;
+  height: 40px;
+  font-size:18px
+}
+
 .login-or-reg-div{
   margin:0 auto;
   margin-top:100px;
-  $divWidth:700px;
-  $divHeight:300px;
+  $divWidth:600px;
+  $divHeight:400px;
   width: $divWidth;
   height: $divHeight;
-  background-color: gray;
   position:relative;
+  p{
+    font-size:18px;
+    width: 200px;
+    margin:0 auto;
+    text-align: center;
+  }
   form{
     text-align: center;
     line-height:40px;
-    $formWidthPce: 80%;
-    $formHeightPce: 80%;
     width: 100%;
     height: 80%;
-    background-color: antiquewhite;
+    background-color: rgb(184, 181, 179);
     div{
-       padding-left:10px;
-       padding-top:10px;
-       font-size:18px;
+       label span{
+        @include label-style
+       }
+       input{
+        @include input-style;
+       }
     }
     input.btn{
       display: inline-block;
-      width: 100px;
-      height: 40px;
       margin-top:10px;
       color:#fff;
-      font-size:18px;
-      background-color:rgba(39, 39, 214, 0.8);
+      background-color:#42b983;
+      @include button-style;
     }
-    a{
-      position: absolute;
-      bottom:50px;
-      right:10px;
-      color:rgba(39, 39, 214, 0.8);
+    button.toLoginLink{
+      margin-top:10px;
+      margin-left:30px;
+      color:#42b983;
+      background-color: #fff;
+      @include button-style;
+    }
+    button.toRegLink{
+      margin-top:10px;
+      margin-left:30px;
+      color:#42b983;
+      background-color: #fff;
+      @include button-style;
     }
     }
 }
