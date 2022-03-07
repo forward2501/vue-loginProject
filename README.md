@@ -26,8 +26,22 @@
 
 ## 预览
 
+### 登录/注册
+
 ![image](https://user-images.githubusercontent.com/52432577/156955038-0fb6c073-9686-4ae0-bb2c-ee37f0f65cec.png)
 ![image](https://user-images.githubusercontent.com/52432577/156954941-f819bb60-3f4e-47ec-a3ae-1510eca50368.png)
+
+### 个人中心
+
+![image](https://user-images.githubusercontent.com/52432577/156955208-0619a8ce-c23d-4b31-b429-2ac35f46c178.png)
+
+### 发表新闻
+
+![image](https://user-images.githubusercontent.com/52432577/156955294-28fcfc78-ba19-4518-84da-2b5b934746c8.png)
+
+### 新闻列表
+
+![image](https://user-images.githubusercontent.com/52432577/156955447-dfedebaa-e46f-453e-a5f5-eaf659d93e10.png)
 
 ## Project setup
 ```
