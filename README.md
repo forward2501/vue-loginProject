@@ -24,6 +24,10 @@
 
 `npm run serve`
 
+## 预览
+
+![image](https://user-images.githubusercontent.com/52432577/156954890-c186a443-fc46-4f89-8b8b-416c9ebc959c.png)
+
 ## Project setup
 ```
 npm install
