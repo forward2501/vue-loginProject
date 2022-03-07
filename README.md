@@ -26,7 +26,7 @@
 
 ## 预览
 
-![image](https://user-images.githubusercontent.com/52432577/156954890-c186a443-fc46-4f89-8b8b-416c9ebc959c.png)
+![image](https://user-images.githubusercontent.com/52432577/156955038-0fb6c073-9686-4ae0-bb2c-ee37f0f65cec.png)
 ![image](https://user-images.githubusercontent.com/52432577/156954941-f819bb60-3f4e-47ec-a3ae-1510eca50368.png)
 
 ## Project setup
